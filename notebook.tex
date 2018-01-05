@@ -1,0 +1,1242 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Titanic - notebook - Luquiens}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{TITANIC DATA SCIENCE
+PROBLEM}\label{titanic-data-science-problem}
+
+\emph{Luquiens, Guillaume -\/- CS50 personnal project}
+
+    \section{1. Problem description}\label{problem-description}
+
+It is to predict the survival outcome of passengers on the Titanic.
+
+......
+
+\textbf{Competition Description}
+
+The sinking of the RMS Titanic is one of the most infamous shipwrecks in
+history. On April 15, 1912, during her maiden voyage, the Titanic sank
+after colliding with an iceberg, killing 1502 out of 2224 passengers and
+crew. This sensational tragedy shocked the international community and
+led to better safety regulations for ships.
+
+One of the reasons that the shipwreck led to such loss of life was that
+there were not enough lifeboats for the passengers and crew. Although
+there was some element of luck involved in surviving the sinking, some
+groups of people were more likely to survive than others, such as women,
+children, and the upper-class.
+
+In this challenge, we ask you to complete the analysis of what sorts of
+people were likely to survive. In particular, we ask you to apply the
+tools of machine learning to predict which passengers survived the
+tragedy.
+
+\textbf{Practice Skills}
+
+Binary classification Python and R basics
+
+    \section{2. Dataset Loaded}\label{dataset-loaded}
+
+The dataset is available in the Kaggle competitions, with a train and
+test files \href{https://www.kaggle.com/c/titanic/data}{Kaggle's
+Titanic: Machine Learning from Disaster}
+
+    \section{3. Manage data}\label{manage-data}
+
+A lot of transformations are to be done to get the best classifier
+results£.
+
+    \subsection{3.1 Import Libraries}\label{import-libraries}
+
+The following code is written in Python 3. A lot of librairies are
+available with many intersting functions.
+
+    \subsubsection{Data frame and arrays
+libraries}\label{data-frame-and-arrays-libraries}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+
+    \subsubsection{Data Modelling Libraries}\label{data-modelling-libraries}
+
+\textbf{scikit-learn} library is very popular for all the algorithms we
+are going to apply on our datasets. And before those algorithms, we have
+to understand as good as possible the data visualization, thanks to
+\textbf{matplotlib} or and \textbf{seaborn} library.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{c+c1}{\PYZsh{}Common Model Algorithms}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{svm}\PY{p}{,} \PY{n}{tree}\PY{p}{,} \PY{n}{linear\PYZus{}model}\PY{p}{,} \PY{n}{neighbors}\PY{p}{,} \PY{n}{naive\PYZus{}bayes}\PY{p}{,} \PY{n}{ensemble}\PY{p}{,} \PY{n}{discriminant\PYZus{}analysis}\PY{p}{,} \PY{n}{gaussian\PYZus{}process}
+         
+         \PY{c+c1}{\PYZsh{}Common Model Helpers}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{OneHotEncoder}\PY{p}{,} \PY{n}{LabelEncoder}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{feature\PYZus{}selection}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{model\PYZus{}selection}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{metrics}
+         
+         \PY{c+c1}{\PYZsh{} Visualization}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib} \PY{k}{as} \PY{n+nn}{mpl}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pylab} \PY{k}{as} \PY{n+nn}{pylab}
+         \PY{k+kn}{import} \PY{n+nn}{seaborn} \PY{k}{as} \PY{n+nn}{sns}
+         \PY{k+kn}{from} \PY{n+nn}{pandas}\PY{n+nn}{.}\PY{n+nn}{tools}\PY{n+nn}{.}\PY{n+nn}{plotting} \PY{k}{import} \PY{n}{scatter\PYZus{}matrix}
+         
+         \PY{c+c1}{\PYZsh{} Configure visualizations}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{n}{mpl}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+         \PY{n}{sns}\PY{o}{.}\PY{n}{set\PYZus{}style}\PY{p}{(} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{white}\PY{l+s+s1}{\PYZsq{}} \PY{p}{)}
+         \PY{n}{pylab}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}} \PY{p}{]} \PY{o}{=} \PY{l+m+mi}{12} \PY{p}{,} \PY{l+m+mi}{6}
+\end{Verbatim}
+
+
+    \subsection{3.2 Data details}\label{data-details}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{} a dataset should be broken into 3 splits: train, test, and (final) validation}
+         \PY{c+c1}{\PYZsh{} but the splits are already done, as we have a train and test .csv files available.}
+         
+         \PY{c+c1}{\PYZsh{} load  the train split}
+         \PY{n}{data\PYZus{}train} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/train.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} load  the test split}
+         \PY{n}{data\PYZus{}test} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data/test.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}preview data}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 891 entries, 0 to 890
+Data columns (total 12 columns):
+PassengerId    891 non-null int64
+Survived       891 non-null int64
+Pclass         891 non-null int64
+Name           891 non-null object
+Sex            891 non-null object
+Age            714 non-null float64
+SibSp          891 non-null int64
+Parch          891 non-null int64
+Ticket         891 non-null object
+Fare           891 non-null float64
+Cabin          204 non-null object
+Embarked       889 non-null object
+dtypes: float64(2), int64(5), object(5)
+memory usage: 83.6+ KB
+None
+
+    \end{Verbatim}
+
+    So, the data\_train is a DataFrame.
+
+There is 891 rows. Each columns has a different name, and type of
+element.
+
+We can also see that some of the columns lack elements, it is given by
+the total columns data. Let's focus on this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} PassengerId    891
+         Survived       891
+         Pclass         891
+         Name           891
+         Sex            891
+         Age            714
+         SibSp          891
+         Parch          891
+         Ticket         891
+         Fare           891
+         Cabin          204
+         Embarked       889
+         dtype: int64
+\end{Verbatim}
+            
+    Let's print the number of null values
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Train columns with null values:}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train columns with null values:
+ PassengerId      0
+Survived         0
+Pclass           0
+Name             0
+Sex              0
+Age            177
+SibSp            0
+Parch            0
+Ticket           0
+Fare             0
+Cabin          687
+Embarked         2
+dtype: int64
+
+
+    \end{Verbatim}
+
+    We can focus on the first elements of the data frame to have a fast view
+of what's inside it !
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{c+c1}{\PYZsh{} first elements of the data frame}
+         \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}61}]:}    PassengerId  Survived  Pclass  \textbackslash{}
+         0            1         0       3   
+         1            2         1       1   
+         2            3         1       3   
+         3            4         1       1   
+         4            5         0       3   
+         
+                                                         Name     Sex   Age  SibSp  \textbackslash{}
+         0                            Braund, Mr. Owen Harris    male  22.0      1   
+         1  Cumings, Mrs. John Bradley (Florence Briggs Th{\ldots}  female  38.0      1   
+         2                             Heikkinen, Miss. Laina  female  26.0      0   
+         3       Futrelle, Mrs. Jacques Heath (Lily May Peel)  female  35.0      1   
+         4                           Allen, Mr. William Henry    male  35.0      0   
+         
+            Parch            Ticket     Fare Cabin Embarked  
+         0      0         A/5 21171   7.2500   NaN        S  
+         1      0          PC 17599  71.2833   C85        C  
+         2      0  STON/O2. 3101282   7.9250   NaN        S  
+         3      0            113803  53.1000  C123        S  
+         4      0            373450   8.0500   NaN        S  
+\end{Verbatim}
+            
+    We can have a better description, with analysis of all columns
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{n}{include} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{all}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}62}]:}         PassengerId    Survived      Pclass  \textbackslash{}
+         count    891.000000  891.000000  891.000000   
+         unique          NaN         NaN         NaN   
+         top             NaN         NaN         NaN   
+         freq            NaN         NaN         NaN   
+         mean     446.000000    0.383838    2.308642   
+         std      257.353842    0.486592    0.836071   
+         min        1.000000    0.000000    1.000000   
+         25\%      223.500000    0.000000    2.000000   
+         50\%      446.000000    0.000000    3.000000   
+         75\%      668.500000    1.000000    3.000000   
+         max      891.000000    1.000000    3.000000   
+         
+                                                          Name   Sex         Age  \textbackslash{}
+         count                                             891   891  714.000000   
+         unique                                            891     2         NaN   
+         top     Appleton, Mrs. Edward Dale (Charlotte Lamson)  male         NaN   
+         freq                                                1   577         NaN   
+         mean                                              NaN   NaN   29.699118   
+         std                                               NaN   NaN   14.526497   
+         min                                               NaN   NaN    0.420000   
+         25\%                                               NaN   NaN   20.125000   
+         50\%                                               NaN   NaN   28.000000   
+         75\%                                               NaN   NaN   38.000000   
+         max                                               NaN   NaN   80.000000   
+         
+                      SibSp       Parch    Ticket        Fare        Cabin Embarked  
+         count   891.000000  891.000000       891  891.000000          204      889  
+         unique         NaN         NaN       681         NaN          147        3  
+         top            NaN         NaN  CA. 2343         NaN  C23 C25 C27        S  
+         freq           NaN         NaN         7         NaN            4      644  
+         mean      0.523008    0.381594       NaN   32.204208          NaN      NaN  
+         std       1.102743    0.806057       NaN   49.693429          NaN      NaN  
+         min       0.000000    0.000000       NaN    0.000000          NaN      NaN  
+         25\%       0.000000    0.000000       NaN    7.910400          NaN      NaN  
+         50\%       0.000000    0.000000       NaN   14.454200          NaN      NaN  
+         75\%       1.000000    0.000000       NaN   31.000000          NaN      NaN  
+         max       8.000000    6.000000       NaN  512.329200          NaN      NaN  
+\end{Verbatim}
+            
+    Because so of the rows aren't numerical, the mean, std, etc. elements
+can't be calculated.
+
+So, we can first focus on numerical columns
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:}        PassengerId    Survived      Pclass         Age       SibSp  \textbackslash{}
+         count   891.000000  891.000000  891.000000  714.000000  891.000000   
+         mean    446.000000    0.383838    2.308642   29.699118    0.523008   
+         std     257.353842    0.486592    0.836071   14.526497    1.102743   
+         min       1.000000    0.000000    1.000000    0.420000    0.000000   
+         25\%     223.500000    0.000000    2.000000   20.125000    0.000000   
+         50\%     446.000000    0.000000    3.000000   28.000000    0.000000   
+         75\%     668.500000    1.000000    3.000000   38.000000    1.000000   
+         max     891.000000    1.000000    3.000000   80.000000    8.000000   
+         
+                     Parch        Fare  
+         count  891.000000  891.000000  
+         mean     0.381594   32.204208  
+         std      0.806057   49.693429  
+         min      0.000000    0.000000  
+         25\%      0.000000    7.910400  
+         50\%      0.000000   14.454200  
+         75\%      0.000000   31.000000  
+         max      6.000000  512.329200  
+\end{Verbatim}
+            
+    \subsection{3.3 Complete missing values}\label{complete-missing-values}
+
+Now that we know what series is empty, we can execute our code to fill
+it.
+
+If we had several numerical column, and not just one, we would be able
+to use the same function to fill it, so let's compare three numerical
+features.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{median\PYZus{}features} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{median\PYZus{}features}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+         
+             
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:}              Fare      Pclass         Age
+         count  891.000000  891.000000  714.000000
+         mean    32.204208    2.308642   29.699118
+         std     49.693429    0.836071   14.526497
+         min      0.000000    1.000000    0.420000
+         25\%      7.910400    2.000000   20.125000
+         50\%     14.454200    3.000000   28.000000
+         75\%     31.000000    3.000000   38.000000
+         max    512.329200    3.000000   80.000000
+\end{Verbatim}
+            
+    Description of the median value of those 3 columns
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{median\PYZus{}features} \PY{o}{=} \PY{n}{median\PYZus{}features}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+         \PY{n}{median\PYZus{}features}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} Fare      15.7417
+         Pclass     2.0000
+         Age       28.0000
+         dtype: float64
+\end{Verbatim}
+            
+    Let's fill the empty elements with this median value
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{n}{data\PYZus{}train}\PY{o}{=}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{median\PYZus{}features}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}67}]:}        PassengerId    Survived      Pclass         Age       SibSp  \textbackslash{}
+         count   891.000000  891.000000  891.000000  891.000000  891.000000   
+         mean    446.000000    0.383838    2.308642   29.361582    0.523008   
+         std     257.353842    0.486592    0.836071   13.019697    1.102743   
+         min       1.000000    0.000000    1.000000    0.420000    0.000000   
+         25\%     223.500000    0.000000    2.000000   22.000000    0.000000   
+         50\%     446.000000    0.000000    3.000000   28.000000    0.000000   
+         75\%     668.500000    1.000000    3.000000   35.000000    1.000000   
+         max     891.000000    1.000000    3.000000   80.000000    8.000000   
+         
+                     Parch        Fare  
+         count  891.000000  891.000000  
+         mean     0.381594   32.204208  
+         std      0.806057   49.693429  
+         min      0.000000    0.000000  
+         25\%      0.000000    7.910400  
+         50\%      0.000000   14.454200  
+         75\%      0.000000   31.000000  
+         max      6.000000  512.329200  
+\end{Verbatim}
+            
+    So now, we have fill the missing values with the median !
+
+    \subsection{3.4 Convert Formats}\label{convert-formats}
+
+The mathematical analysis, all the variables must be converted. But we
+will first focus on the easiest ones. It is Sex, Pclass and Embarked.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{c+c1}{\PYZsh{} let\PYZsq{}s convert the data\PYZus{}train. With the sklearn tools, we need to have every row in numerical values.}
+         \PY{n}{data\PYZus{}encoded} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}
+             \PY{p}{[}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SibSp}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Parch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,}
+                      \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{Sex}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Sex}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{drop\PYZus{}first}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+                      \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{Pclass}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{drop\PYZus{}first}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+                      \PY{n}{pd}\PY{o}{.}\PY{n}{get\PYZus{}dummies}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{Embarked}\PY{p}{,} \PY{n}{prefix}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Embarked}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{drop\PYZus{}first}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{]}\PY{p}{,}
+                     \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} how the concatenate function worked ??}
+         \PY{n}{data\PYZus{}encoded}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}95}]:}       Fare   Age  SibSp  Parch  Sex\_male  Pclass\_2  Pclass\_3  Embarked\_Q  \textbackslash{}
+         0   7.2500  22.0      1      0         1         0         1           0   
+         1  71.2833  38.0      1      0         0         0         0           0   
+         2   7.9250  26.0      0      0         0         0         1           0   
+         3  53.1000  35.0      1      0         0         0         0           0   
+         4   8.0500  35.0      0      0         1         0         1           0   
+         
+            Embarked\_S  
+         0           1  
+         1           0  
+         2           1  
+         3           1  
+         4           1  
+\end{Verbatim}
+            
+    \section{4. Data basic visualisation}\label{data-basic-visualisation}
+
+Before we use the encoded datas, we can make a visualisation of how the
+different elements are correlated.
+
+    We first focus on how Age and Fare are scattered.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{copper}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that the Fare has a very large scale. And it is very linked
+to the Age column.
+
+Let's try to see the density of each variable.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+                        \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We can see that the density of the Fare variable has a large scale, but
+with exponential growth from 0 to 20. So, we will see what does a log
+function on this column does.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{c+c1}{\PYZsh{} we can\PYZsq{}t use the log function for a 0 value. So, we add 10 to the Ticket value (Fare)}
+         \PY{n}{data\PYZus{}train\PYZus{}log} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{LogFare}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{Fare} \PY{o}{+} \PY{l+m+mf}{10.}\PY{p}{)}\PY{p}{)}
+         \PY{n}{data\PYZus{}train\PYZus{}log} \PY{o}{=} \PY{n}{data\PYZus{}train\PYZus{}log}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}86}]:} \PY{n}{data\PYZus{}train\PYZus{}log}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{scatter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogFare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{s}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{copper}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_38_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    We see that the log function has done a great scale transofrmation.
+Let's see if the density has been improved !
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{data\PYZus{}train\PYZus{}log}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LogFare}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Pclass}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,}
+                        \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{,} \PY{n}{diagonal}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{kde}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_40_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{c+c1}{\PYZsh{} plot distributions of Age of passengers who survived or did not survive}
+         \PY{n}{a} \PY{o}{=} \PY{n}{sns}\PY{o}{.}\PY{n}{FacetGrid}\PY{p}{(} \PY{n}{data\PYZus{}train\PYZus{}log}\PY{p}{,} \PY{n}{hue} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{aspect}\PY{o}{=}\PY{l+m+mi}{4} \PY{p}{)}
+         \PY{n}{a}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{n}{sns}\PY{o}{.}\PY{n}{kdeplot}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{shade}\PY{o}{=} \PY{k+kc}{True} \PY{p}{)}
+         \PY{n}{a}\PY{o}{.}\PY{n}{set}\PY{p}{(}\PY{n}{xlim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0} \PY{p}{,} \PY{n}{data\PYZus{}train\PYZus{}log}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Age}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n}{a}\PY{o}{.}\PY{n}{add\PYZus{}legend}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}94}]:} <seaborn.axisgrid.FacetGrid at 0xd518320>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_41_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{5. Split training and
+testing}\label{split-training-and-testing}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{survived\PYZus{}column} \PY{o}{=} \PY{n}{data\PYZus{}train}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Survived}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{target} \PY{o}{=} \PY{n}{survived\PYZus{}column}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+          \PY{c+c1}{\PYZsh{} replace model\PYZus{}selection by cross\PYZus{}validation for old version of scikit\PYZhy{}learn}
+          
+          \PY{n}{features\PYZus{}train}\PY{p}{,} \PY{n}{features\PYZus{}test}\PY{p}{,} \PY{n}{target\PYZus{}train}\PY{p}{,} \PY{n}{target\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
+              \PY{n}{features\PYZus{}array}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.20}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}108}]:} \PY{n}{features\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}108}]:} (712, 9)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}109}]:} \PY{n}{features\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}109}]:} (179, 9)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}110}]:} \PY{n}{target\PYZus{}train}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}110}]:} (712,)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}111}]:} \PY{n}{target\PYZus{}test}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}111}]:} (179,)
+\end{Verbatim}
+            
+    \section{6. Model Analysis}\label{model-analysis}
+
+    We are now able to use different algoritms to. We will start with the
+Logistci Regression, and then compare the different ones.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{c+c1}{\PYZsh{} we can start with a Logistic Regression}
+          \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LogisticRegression}
+          
+          \PY{n}{logreg} \PY{o}{=} \PY{n}{LogisticRegression}\PY{p}{(}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{1.}\PY{p}{)}
+          \PY{n}{logreg}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{features\PYZus{}train}\PY{p}{,} \PY{n}{target\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}113}]:} LogisticRegression(C=1.0, class\_weight=None, dual=False, fit\_intercept=True,
+                    intercept\_scaling=1, max\_iter=100, multi\_class='ovr', n\_jobs=1,
+                    penalty='l2', random\_state=None, solver='liblinear', tol=0.0001,
+                    verbose=0, warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{n}{target\PYZus{}predicted} \PY{o}{=} \PY{n}{logreg}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{features\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{accuracy\PYZus{}score}
+          
+          \PY{n}{accuracy\PYZus{}score}\PY{p}{(}\PY{n}{target\PYZus{}test}\PY{p}{,} \PY{n}{target\PYZus{}predicted}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}115}]:} 0.79329608938547491
+\end{Verbatim}
+            
+    79\% accuracy with the logistic regression.
+
+Let's use a cross validation method. We start with a 6 cross-validation
+model, and compare the accuracy.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{cross\PYZus{}val\PYZus{}score}
+          
+          \PY{n}{scores} \PY{o}{=} \PY{n}{cross\PYZus{}val\PYZus{}score}\PY{p}{(}\PY{n}{logreg}\PY{p}{,} \PY{n}{features\PYZus{}array}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{cv}\PY{o}{=}\PY{l+m+mi}{6}\PY{p}{)}
+          \PY{n}{scores}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}122}]:} array([ 0.76510067,  0.80536913,  0.81879195,  0.77702703,  0.77027027,
+                  0.83108108])
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          
+          \PYZsh{} We can use the accuracy scoring
+          scores = cross\PYZus{}val\PYZus{}score(logreg, features\PYZus{}array, target, cv=5, scoring=\PYZsq{}accuracy\PYZsq{})
+          print(\PYZdq{}Logistic Regression CV scores:\PYZdq{})
+          print(\PYZdq{}min: \PYZob{}:.4f\PYZcb{}, mean: \PYZob{}:.4f\PYZcb{}, max: \PYZob{}:.4f\PYZcb{}, std: \PYZob{}:.4f\PYZcb{}\PYZdq{}.format(
+              scores.min(), scores.mean(), scores.max(), scores.std()))
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Logistic Regression CV scores:
+min: 0.7640, mean: 0.7946, max: 0.8249, std: 0.0210
+Wall time: 29 ms
+
+    \end{Verbatim}
+
+    So, we can see that the mean of the accuracy is a little bit higher
+after the cross-validation
+
+    Now, we can compare the accuracy scoring of different Machine Learning
+Algoritms. We will now use a cross-validation of 10.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{n}{MLA} \PY{o}{=} \PY{p}{[}
+              \PY{c+c1}{\PYZsh{} Ensemble Methods}
+              \PY{n}{ensemble}\PY{o}{.}\PY{n}{AdaBoostClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{ensemble}\PY{o}{.}\PY{n}{BaggingClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{ensemble}\PY{o}{.}\PY{n}{ExtraTreesClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{ensemble}\PY{o}{.}\PY{n}{GradientBoostingClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{ensemble}\PY{o}{.}\PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}\PY{p}{,}
+          
+              \PY{c+c1}{\PYZsh{} Gaussian Processes}
+              \PY{n}{gaussian\PYZus{}process}\PY{o}{.}\PY{n}{GaussianProcessClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              
+              \PY{c+c1}{\PYZsh{} GLM}
+              \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{LogisticRegressionCV}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{PassiveAggressiveClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{linear\PYZus{}model}\PY{o}{.} \PY{n}{RidgeClassifierCV}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{SGDClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{linear\PYZus{}model}\PY{o}{.}\PY{n}{Perceptron}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              
+              \PY{c+c1}{\PYZsh{} Navies Bayes}
+              \PY{n}{naive\PYZus{}bayes}\PY{o}{.}\PY{n}{GaussianNB}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              
+              \PY{c+c1}{\PYZsh{} Nearest Neighbor}
+              \PY{n}{neighbors}\PY{o}{.}\PY{n}{KNeighborsClassifier}\PY{p}{(}\PY{n}{n\PYZus{}neighbors} \PY{o}{=} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,}
+              
+              \PY{c+c1}{\PYZsh{} SVM}
+              \PY{n}{svm}\PY{o}{.}\PY{n}{SVC}\PY{p}{(}\PY{n}{probability}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{,}
+              \PY{n}{svm}\PY{o}{.}\PY{n}{LinearSVC}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              
+              \PY{c+c1}{\PYZsh{} Trees    }
+              \PY{n}{tree}\PY{o}{.}\PY{n}{DecisionTreeClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              \PY{n}{tree}\PY{o}{.}\PY{n}{ExtraTreeClassifier}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+              
+              \PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} create the data frame to compare MLA}
+          \PY{n}{MLA\PYZus{}columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Parameters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Train Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Test Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{MLA\PYZus{}compare} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{columns} \PY{o}{=} \PY{n}{MLA\PYZus{}columns}\PY{p}{)}
+          
+          
+          \PY{c+c1}{\PYZsh{} index through MLA and save performance to table}
+          \PY{n}{row\PYZus{}index} \PY{o}{=} \PY{l+m+mi}{0}
+          \PY{k}{for} \PY{n}{alg} \PY{o+ow}{in} \PY{n}{MLA}\PY{p}{:}
+          
+              \PY{c+c1}{\PYZsh{} set name and parameters}
+              \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{alg}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}class\PYZus{}\PYZus{}}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}
+              \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Parameters}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb}{str}\PY{p}{(}\PY{n}{alg}\PY{o}{.}\PY{n}{get\PYZus{}params}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{} score model with cross validation: http://scikit\PYZhy{}learn.org/stable/modules/generated/sklearn.model\PYZus{}selection.cross\PYZus{}validate.html\PYZsh{}sklearn.model\PYZus{}selection.cross\PYZus{}validate}
+              \PY{n}{cv\PYZus{}results} \PY{o}{=} \PY{n}{model\PYZus{}selection}\PY{o}{.}\PY{n}{cross\PYZus{}validate}\PY{p}{(}\PY{n}{alg}\PY{p}{,} \PY{n}{features\PYZus{}array}\PY{p}{,} \PY{n}{target}\PY{p}{,} \PY{n}{cv}  \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+              \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{cv\PYZus{}results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fit\PYZus{}time}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Train Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{cv\PYZus{}results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+              \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Test Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{cv\PYZus{}results}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test\PYZus{}score}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}   
+          
+              \PY{n}{MLA}\PY{p}{[}\PY{n}{row\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{alg}\PY{o}{.}\PY{n}{fit} \PY{p}{(}\PY{n}{features\PYZus{}array}\PY{p}{,} \PY{n}{target}\PY{p}{)} \PY{c+c1}{\PYZsh{}fit model for submission}
+          
+              \PY{n}{row\PYZus{}index}\PY{o}{+}\PY{o}{=}\PY{l+m+mi}{1}
+          
+          \PY{c+c1}{\PYZsh{} print and sort table}
+          \PY{n}{MLA\PYZus{}compare}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Test Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{ascending} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{} print(MLA\PYZus{}compare)}
+          \PY{n}{MLA\PYZus{}compare}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.passive\_aggressive.PassiveAggressiveClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.stochastic\_gradient.SGDClassifier'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}linear\_model\textbackslash{}stochastic\_gradient.py:128: FutureWarning: max\_iter and tol parameters have been added in <class 'sklearn.linear\_model.perceptron.Perceptron'> in 0.19. If both are left unset, they default to max\_iter=5 and tol=None. If tol is not None, max\_iter defaults to max\_iter=1000. From 0.21, default max\_iter will be 1000, and default tol will be 1e-3.
+  "and default tol will be 1e-3." \% type(self), FutureWarning)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+C:\textbackslash{}Users\textbackslash{}Amandine\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}sklearn\textbackslash{}utils\textbackslash{}deprecation.py:122: FutureWarning: You are accessing a training score ('train\_score'), which will not be available by default any more in 0.21. If you need training scores, please set return\_train\_score=True
+  warnings.warn(*warn\_args, **warn\_kwargs)
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}146}]:}                        MLA Name  \textbackslash{}
+          3    GradientBoostingClassifier   
+          4        RandomForestClassifier   
+          1             BaggingClassifier   
+          0            AdaBoostClassifier   
+          6          LogisticRegressionCV   
+          2          ExtraTreesClassifier   
+          8             RidgeClassifierCV   
+          11                   GaussianNB   
+          15       DecisionTreeClassifier   
+          16          ExtraTreeClassifier   
+          14                    LinearSVC   
+          5     GaussianProcessClassifier   
+          12         KNeighborsClassifier   
+          13                          SVC   
+          7   PassiveAggressiveClassifier   
+          10                   Perceptron   
+          9                 SGDClassifier   
+          
+                                                 MLA Parameters MLA Train Accuracy  \textbackslash{}
+          3   \{'criterion': 'friedman\_mse', 'init': None, 'l{\ldots}           0.894999   
+          4   \{'bootstrap': True, 'class\_weight': None, 'cri{\ldots}            0.98117   
+          1   \{'base\_estimator': None, 'bootstrap': True, 'b{\ldots}           0.967702   
+          0   \{'algorithm': 'SAMME.R', 'base\_estimator': Non{\ldots}           0.830902   
+          6   \{'Cs': 10, 'class\_weight': None, 'cv': None, '{\ldots}           0.809952   
+          2   \{'bootstrap': False, 'class\_weight': None, 'cr{\ldots}           0.981295   
+          8   \{'alphas': (0.1, 1.0, 10.0), 'class\_weight': N{\ldots}           0.800848   
+          11                                   \{'priors': None\}           0.796608   
+          15  \{'class\_weight': None, 'criterion': 'gini', 'm{\ldots}           0.981295   
+          16  \{'class\_weight': None, 'criterion': 'gini', 'm{\ldots}           0.981295   
+          14  \{'C': 1.0, 'class\_weight': None, 'dual': True,{\ldots}           0.733874   
+          5   \{'copy\_X\_train': True, 'kernel': None, 'max\_it{\ldots}           0.945878   
+          12  \{'algorithm': 'auto', 'leaf\_size': 30, 'metric{\ldots}            0.84063   
+          13  \{'C': 1.0, 'cache\_size': 200, 'class\_weight': {\ldots}           0.882406   
+          7   \{'C': 1.0, 'average': False, 'class\_weight': N{\ldots}           0.663673   
+          10  \{'alpha': 0.0001, 'class\_weight': None, 'eta0'{\ldots}           0.570966   
+          9   \{'alpha': 0.0001, 'average': False, 'class\_wei{\ldots}           0.576014   
+          
+             MLA Test Accuracy    MLA Time  
+          3           0.827212    0.103106  
+          4           0.816101    0.210912  
+          1           0.813804   0.0223012  
+          0           0.813803   0.0845048  
+          6           0.799197    0.441225  
+          2           0.793591   0.0184011  
+          8           0.790107  0.00240011  
+          11          0.787972  0.00110011  
+          15          0.785714  0.00170014  
+          16          0.775789  0.00150011  
+          14          0.728485   0.0637036  
+          5           0.720781    0.942354  
+          12          0.716224  0.00109999  
+          13          0.714103    0.160809  
+          7           0.662417  0.00150008  
+          10          0.576233  0.00160007  
+          9           0.567856   0.0012001  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{c+c1}{\PYZsh{}MLA\PYZus{}compare.describe()}
+          \PY{c+c1}{\PYZsh{}barplot using https://seaborn.pydata.org/generated/seaborn.barplot.html}
+          \PY{n}{sns}\PY{o}{.}\PY{n}{barplot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Test Accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{MLA Name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{data} \PY{o}{=} \PY{n}{MLA\PYZus{}compare}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}prettify using pyplot: https://matplotlib.org/api/pyplot\PYZus{}api.html}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Machine Learning Algorithm Accuracy Score }\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy Score (}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Algorithm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}143}]:} Text(0,0.5,'Algorithm')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{7. Machine Learning
+optimisation}\label{machine-learning-optimisation}
+
+    With the scikitlearn functions, we have a lot of different way to find
+the best accuracy of the classifier.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}162}]:} \PY{o}{\PYZpc{}\PYZpc{}}\PY{k}{time}
+          
+          from sklearn.ensemble import GradientBoostingClassifier
+          
+          from sklearn.grid\PYZus{}search import GridSearchCV
+          from sklearn.model\PYZus{}selection import cross\PYZus{}val\PYZus{}score, KFold
+          
+          
+          
+          n\PYZus{}estimators\PYZus{}list = [200, 500, 1000]
+          max\PYZus{}depth\PYZus{}list = [2, 3, 5]
+          learning\PYZus{}rate\PYZus{}list = [0.03, 0.05, 0.1]
+          
+          \PYZsh{} use of the tuned parameters
+          tuned\PYZus{}parameters = \PYZob{}\PYZsq{}n\PYZus{}estimators\PYZsq{}: n\PYZus{}estimators\PYZus{}list,
+                              \PYZsq{}max\PYZus{}depth\PYZsq{}: max\PYZus{}depth\PYZus{}list,
+                              \PYZsq{}learning\PYZus{}rate\PYZsq{} : learning\PYZus{}rate\PYZus{}list\PYZcb{}
+          
+          \PYZsh{} define your clf
+          clf = GradientBoostingClassifier()
+          
+          \PYZsh{} et quand on a des heures pour choisir les meilleurs paramètres...
+          gs = GridSearchCV(clf, tuned\PYZus{}parameters, cv=5, refit=True, scoring=\PYZsq{}accuracy\PYZsq{}, n\PYZus{}jobs=3)
+          gs.fit(features\PYZus{}array, target)
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Wall time: 47.2 s
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{n}{gs}\PY{o}{.}\PY{n}{best\PYZus{}params\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}157}]:} \{'learning\_rate': 0.05, 'max\_depth': 3, 'n\_estimators': 500\}
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}160}]:} \PY{n}{gs}\PY{o}{.}\PY{n}{best\PYZus{}estimator\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}160}]:} GradientBoostingClassifier(criterion='friedman\_mse', init=None,
+                        learning\_rate=0.05, loss='deviance', max\_depth=3,
+                        max\_features=None, max\_leaf\_nodes=None,
+                        min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                        min\_samples\_leaf=1, min\_samples\_split=2,
+                        min\_weight\_fraction\_leaf=0.0, n\_estimators=500,
+                        presort='auto', random\_state=None, subsample=1.0, verbose=0,
+                        warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}161}]:} \PY{n}{gs}\PY{o}{.}\PY{n}{best\PYZus{}score\PYZus{}}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}161}]:} 0.8338945005611672
+\end{Verbatim}
+            
+    That's the best score. With the MLA optimisation, we have 83.3 \%
+accuracy, a little bit better than 82.7 before the gridsearch !!!
+
+    
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
